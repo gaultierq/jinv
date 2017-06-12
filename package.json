@@ -11,6 +11,7 @@
   "dependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.0.0",
+    "babel-preset-react": "^6.24.1",
     "express": "^4.15.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
