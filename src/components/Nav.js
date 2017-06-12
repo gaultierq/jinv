@@ -8,8 +8,8 @@ export default class Nav extends React.Component {
 
     render() {
         return (
-            <nav>
-                <ul>
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <ul class="nav navbar-nav">
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/project'>Project</Link></li>
                 </ul>

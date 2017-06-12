@@ -12,8 +12,13 @@ import { Switch, Route } from 'react-router-dom';
 export default class Main extends React.Component {
 
     render() {
+
+        const containerStyle = {
+            marginTop: "60px"
+        };
+
         return (
-            <main>
+            <main class="container" style={containerStyle}>
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path='/project' component={Project}/>
