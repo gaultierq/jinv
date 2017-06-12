@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom'
 
 const app = document.getElementById('app');
 
-
 const layout =
     <BrowserRouter>
         <div>

@@ -21,7 +21,7 @@ export default class Main extends React.Component {
             <main class="container" style={containerStyle}>
                 <Switch>
                     <Route exact path='/' component={Home}/>
-                    <Route path='/project' component={Project}/>
+                    {/*<Route path='/project' component={Project}/>*/}
                 </Switch>
                 <Footer/>
             </main>

@@ -4,7 +4,7 @@
   "description": "Just trying again this ginv project",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "node_modules/.bin/webpack-dev-server --content-base bin --inline --hot"
+    "dev": "node_modules/.bin/webpack-dev-server --content-base src --inline --hot"
   },
   "author": "QG",
   "license": "MIT",
