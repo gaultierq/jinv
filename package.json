@@ -4,12 +4,13 @@
   "description": "Just trying again this ginv project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node ./bin/server.bundle.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
-    "react": "^15.5.4"
+    "react": "^15.5.4",
+    "webpack": "^2.6.1"
   }
 }
