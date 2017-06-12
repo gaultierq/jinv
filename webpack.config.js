@@ -4,20 +4,28 @@ module.exports = {
     context: path.join(__dirname, "src"),
     entry: './client.js'
     , module: {
+        rules: [
+            {
+                test: /\.js$/,
+                enforce: 'pre',
+                exclude: /node_modules/,
+                use: [
+                    "babel-loader",
+                    "eslint-loader",
+                ]
+            },
+        ],
         loaders: [
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules)/,
                 loader: 'babel-loader'
-                , query: {
-                presets: ['react'],
-                plugins: ['react-html-attrs']
             }
-                // , query: {
-                //     presets: ['react', 'es2015', 'stage-0'],
-                //     plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-                // }
-            }
+            // , {
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     loader: ['babel-loader', 'eslint-loader']
+            // }
         ]
     }
     , output: {

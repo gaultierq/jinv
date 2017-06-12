@@ -8,8 +8,7 @@ import Project from "./Project";
 export default class Home extends React.Component {
 
     render() {
-
-        const Projects = [
+        const newVar = [
             "Some Article",
             "Some Other Article",
             "Yet Another Article",
@@ -18,7 +17,8 @@ export default class Home extends React.Component {
             "Partial Article",
             "American Article",
             "Mexican Article",
-        ].map((title, i) => <Project key={i} title={title} desc={title + " desc"}/> );
+        ];
+        const Projects = newVar.map((title, i) => <Project key={i} title={title} desc={title + " desc"}/> );
 
         return (
             <home>
