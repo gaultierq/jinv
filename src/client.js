@@ -1,13 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Header from "./components/Header"
-import Layout from "./pages/Layout"
+import Main from "./pages/Main"
+import Nav from "./components/Nav"
+import { Route, IndexRoute } from 'react-router';
+import { BrowserRouter } from 'react-router-dom'
 
 const app = document.getElementById('app');
 
+
 const layout =
-    <Layout>
-        <div>This is body</div>
-    </Layout>;
+    <BrowserRouter>
+        <div>
+            <Nav/>
+            <Main/>
+        </div>
+
+    </BrowserRouter>;
+
 
 ReactDOM.render(layout, app);
