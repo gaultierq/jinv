@@ -2,15 +2,16 @@
   "name": "jinv",
   "version": "1.0.0",
   "description": "Just trying again this ginv project",
-  "main": "index.js",
+  "main": "webpack.config.js",
   "scripts": {
-    "dev": "node ./bin/server.bundle.js"
+    "dev": "node_modules/.bin/webpack-dev-server --content-base bin --inline --hot"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "QG",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.15.3",
     "react": "^15.5.4",
-    "webpack": "^2.6.1"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }

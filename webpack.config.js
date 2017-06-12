@@ -1,8 +1,10 @@
+var path = require('path');
+
 module.exports = {
-    target: "node",
-    entry: './server.js',
+    context: path.join(__dirname, "src"),
+    entry: './client.js',
     output: {
-        path: __dirname + '/bin',
-        filename: 'server.bundle.js'
+        path: __dirname + "/bin/",
+        filename: "client.bundle.js"
     }
 };
