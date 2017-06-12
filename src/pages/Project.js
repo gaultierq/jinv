@@ -8,9 +8,9 @@ export default class Project extends React.Component {
 
     render() {
         return (
-            <div>
-                <p>This is a project</p>
-            </div>
+            <project>
+                This is a project
+            </project>
         );
     }
 }
