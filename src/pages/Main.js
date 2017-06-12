@@ -19,11 +19,12 @@ export default class Main extends React.Component {
 
         return (
             <main class="container" style={containerStyle}>
-                <Switch>
-                    <Route exact path='/' component={Home}/>
-                    {/*<Route path='/project' component={Project}/>*/}
-                </Switch>
-                <Footer/>
+                <div class="row">
+                    <Switch>
+                        <Route exact path='/' component={Home}/>
+                        {/*<Route path='/project' component={Project}/>*/}
+                    </Switch>
+                </div>
             </main>
         );
     }

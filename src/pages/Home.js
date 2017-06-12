@@ -22,7 +22,7 @@ export default class Home extends React.Component {
 
         return (
             <home>
-                <h2>this is home</h2>
+                <h2>Projects</h2>
                 <div class="row">{Projects}</div>
             </home>
         );
