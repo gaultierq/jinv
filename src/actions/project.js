@@ -14,9 +14,8 @@ export function fetchProjects() {
         payload: fixtures
     }
 }
-export function addProject(title, desc) {
+export function addProject(newProject) {
 
-    const newProject = {title, desc};
     return {
         type: "ADD_PROJECT",
         payload: newProject
