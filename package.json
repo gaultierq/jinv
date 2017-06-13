@@ -4,7 +4,7 @@
   "description": "Just trying again this ginv project",
   "main": "webpack.config.js",
   "scripts": {
-    "dev_old": "node_modules/.bin/webpack-dev-server --content-base src --progress --inline --hot",
+    "dev_old": "node_modules/.bin/webpack-dev-server --content-base client --progress --inline --hot",
     "dev": "nodemon server.js"
   },
   "author": "QG",

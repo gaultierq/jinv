@@ -4,7 +4,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    context: path.join(__dirname, "src"),
+    context: path.join(__dirname, "client"),
     entry:   [
         'webpack/hot/dev-server',
         'webpack-hot-middleware/client',
