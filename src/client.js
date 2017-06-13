@@ -9,6 +9,11 @@ import store from "./store"
 
 const app = document.getElementById('app');
 
+//this is to let the browser now that a module need to be updated
+if (module.hot) {
+    module.hot.accept();
+}
+
 const layout = (<Provider store={store}>
         <BrowserRouter>
             <div>

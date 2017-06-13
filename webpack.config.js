@@ -1,8 +1,16 @@
 var path = require('path');
 
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     context: path.join(__dirname, "src"),
-    entry: './client.js'
+    entry:   [
+        'webpack/hot/dev-server',
+        'webpack-hot-middleware/client',
+        './client.js'
+    ]
+
     , module: {
         rules: [
             {
@@ -32,4 +40,8 @@ module.exports = {
         path: __dirname + "/bin/",
         filename: "client.bundle.js"
     }
+    , plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(), //needed for hot replacement
+        new HtmlWebpackPlugin({template: 'index.html'})]
 };

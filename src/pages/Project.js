@@ -9,7 +9,7 @@ export default class Project extends React.Component {
     render() {
 
         const { title, desc} = this.props;
-        console.log(`rendering project with title=${ title } and desc=${ desc } `); // eslint-disable-line
+        //console.log(`rendering project with title=${ title } and desc=${ desc } `); // eslint-disable-line
 
         return (
             <project class="col-md-4">
