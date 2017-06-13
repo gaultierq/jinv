@@ -10,7 +10,9 @@ export default function reducer( state={
         case "FETCH_PROJECTS": {
             return { ...state, projects: action.payload, fetching: false, fetched: true};
         }
+        case "ADD_PROJECT": {
+            return { ...state, projects: [...state.projects, action.payload]};
+        }
     }
-
     return state
 }
