@@ -35,7 +35,7 @@ app.get('/api/projects', (req, res) => {
 app.get('/', function (req, res) {
     console.log(`request=${req}`);
 
-    const index = path.join(__dirname, 'bin/index.html');
+    const index = path.join(__dirname, 'dist/index.html');
     res.write(middleware.fileSystem.readFileSync(index));
     res.end();
 });

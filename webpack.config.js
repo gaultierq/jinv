@@ -37,7 +37,7 @@ module.exports = {
         ]
     }
     , output: {
-        path: __dirname + "/bin/",
+        path: __dirname + "/dist/",
         filename: "client.bundle.js"
     }
     , plugins: [
