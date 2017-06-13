@@ -6,7 +6,6 @@ const config = require("./webpack.config");
 const express = require('express');
 const app = express();
 
-
 const compiler = require("webpack")(config);
 
 // --> getting rid of webpack-dev-server
@@ -22,6 +21,17 @@ app.use(require("webpack-hot-middleware")(compiler, {
 }));
 // <-- getting rid of webpack-dev-server
 
+//--> api
+app.get('/api/projects', (req, res) => {
+    const fixtures = [
+        {title: "Some Article", desc: "Super cool article on mexico"},
+        {title: "Some Article 2", desc: "Super cool article on mexico 2"},
+        {title: "Some Article 3", desc: "Super cool article on mexico 3"}
+    ];
+
+    res.json(fixtures);
+});
+//<-- api
 app.get('/', function (req, res) {
     console.log(`request=${req}`);
 
@@ -30,7 +40,9 @@ app.get('/', function (req, res) {
     res.end();
 });
 
-app.listen(3000, function () {
+const port = 3000;
+app.listen(port, function () {
     // eslint-disable-next-line no-console
-    console.log('==> 🌎  App running : http://localhost:3000');
+
+    console.log('==> 🌎  App running : http://localhost:' + port);
 });
