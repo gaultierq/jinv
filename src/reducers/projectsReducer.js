@@ -1,20 +1,14 @@
-/**
- * Created by qg on 12/06/17.
- */
+
 export default function reducer( state={
-    project: {
-        id: null,
-        title: null,
-        desc: null,
-    },
+    projects: [],
     fetching: false,
     fetched: false,
     error: null
 }, action) {
-
+    // debugger; // eslint-disable-line
     switch (action.type) {
         case "FETCH_PROJECTS": {
-            return { ...state, fetching: true};
+            return { ...state, projects: action.payload, fetching: false, fetched: true};
         }
     }
 

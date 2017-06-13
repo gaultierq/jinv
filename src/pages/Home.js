@@ -4,21 +4,25 @@
 
 import React from 'react';
 import Project from "./Project";
+import { connect } from "react-redux"
 
+import { fetchProjects } from "../actions/project"
+
+@connect((store) => {
+    return {
+        projects: store.project.projects,
+    };
+})
 export default class Home extends React.Component {
 
+    componentWillMount() {
+        this.props.dispatch(fetchProjects())
+    }
+
     render() {
-        const newVar = [
-            "Some Article",
-            "Some Other Article",
-            "Yet Another Article",
-            "Still More",
-            "Fake Article",
-            "Partial Article",
-            "American Article",
-            "Mexican Article",
-        ];
-        const Projects = newVar.map((title, i) => <Project key={i} title={title} desc={title + " desc"}/> );
+        const { projects } = this.props;
+
+        const Projects = projects.map((title, i) => <Project key={i} title={title} desc={title + " desc"}/> );
 
         return (
             <home>
