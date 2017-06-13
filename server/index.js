@@ -1,4 +1,8 @@
 /* eslint-disable no-console */
+
+import Project from './db/ProjectSchema';
+import mongoose from "mongoose";
+
 const path = require('path');
 const config = require("../webpack.config");
 
@@ -22,15 +26,32 @@ app.use(require("webpack-hot-middleware")(compiler, {
 // <-- getting rid of webpack-dev-server
 
 //--> api
+// connect database
+mongoose.connect('mongodb://localhost/jinv', (err) => {
+    if(err) console.log(err);
+    else console.log('Connected to database');
+});
+
+
 app.get('/api/projects', (req, res) => {
     const fixtures = [
         {title: "Some Article", desc: "Super cool article on mexico"},
-        {title: "Some Article 2", desc: "Super cool article on mexico 2"},
+        {title: "Some Article 2", desc: "Another cool article on mexico 2"},
         {title: "Some Article 3", desc: "Super cool article on mexico 3"}
     ];
 
     res.json(fixtures);
 });
+
+app.post('/api/project', (req, res) => {
+    let proj = new Project(req.body);
+
+    proj.save().then((p) => {
+        console.log(`project saved ${p}`);
+        res.json(p);
+    })
+});
+
 //<-- api
 app.get('/', function (req, res) {
     console.log(`request=${req}`);

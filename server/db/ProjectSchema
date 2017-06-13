@@ -1,0 +1,10 @@
+import mong from "mongoose";
+
+const projSch = mong.Schema({
+    title: String,
+    desc: String
+});
+
+const ProjectModel = mong.model('Project', projSch);
+
+export default ProjectModel;
