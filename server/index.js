@@ -43,6 +43,7 @@ app.get('/api/projects', (req, res) => {
     res.json(fixtures);
 });
 
+
 app.post('/api/project', (req, res) => {
     let proj = new Project(req.body);
 

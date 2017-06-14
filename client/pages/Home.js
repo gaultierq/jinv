@@ -29,7 +29,7 @@ export default class Home extends React.Component {
 
     addProject() {
         //todo: inprove semantic
-        this.props.dispatch(addProject(this.state.newTitle, this.state.newDesc));
+        this.props.dispatch(addProject({title: this.state.newTitle, desc: this.state.newDesc}));
     }
 
     render() {

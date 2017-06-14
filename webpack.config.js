@@ -6,11 +6,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     context: path.join(__dirname, "client"),
     entry:   [
-        'webpack/hot/dev-server',
+        // 'webpack/hot/dev-server', probably only for webpack-dev-server
         'webpack-hot-middleware/client',
         './client.js'
     ]
-
     , module: {
         rules: [
             {
@@ -42,6 +41,6 @@ module.exports = {
     }
     , plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(), //needed for hot replacement
+        new webpack.NoEmitOnErrorsPlugin(), //needed for hot replacement
         new HtmlWebpackPlugin({template: 'index.html'})]
 };

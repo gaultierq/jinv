@@ -4,7 +4,8 @@
   "description": "Just trying again this ginv project",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "nodemon ./server --exec babel-node --presets es2015,stage-3"
+    "dev": "nodemon ./server --exec babel-node --presets es2015,stage-3",
+    "dev2": "babel-node ./server --presets es2015,stage-3"
   },
   "author": "QG",
   "license": "MIT",
