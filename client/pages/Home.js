@@ -10,7 +10,7 @@ import { fetchProjects, addProject } from "../actions/project"
 
 @connect((store) => {
     return {
-        projects: store.project.projects,
+        projects: store.project.projects.data,
     };
 })
 export default class Home extends React.Component {
@@ -34,8 +34,10 @@ export default class Home extends React.Component {
 
     render() {
         const { projects } = this.props;
-
-        const Projects = projects.map((project, i) => <Project key={i} title={project.title} desc={project.desc}/> );
+        let Projects = null;
+        if (projects) {
+            Projects = projects.map((project, i) => <Project key={i} title={project.title} desc={project.desc}/> );
+        }
 
         return (
             <home>

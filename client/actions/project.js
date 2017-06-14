@@ -1,15 +1,36 @@
 import axios from 'axios';
 
-export function fetchProjects() {
-    const fixtures = [
-        {title: "Some Article", desc: "Super cool article on mexico"},
-        {title: "Some Article 2", desc: "Super cool article on mexico 2"},
-        {title: "Some Article 3", desc: "Super cool article on mexico 3"}
-    ];
+const APIURL = 'http://localhost:3000/api/';
 
-    return {
-        type: "FETCH_PROJECTS",
-        payload: fixtures
+export function fetchProjects() {
+    // const fixtures = [
+    //     {title: "Some Article", desc: "Super cool article on mexico"},
+    //     {title: "Some Article 2", desc: "Super cool article on mexico 2"},
+    //     {title: "Some Article 3", desc: "Super cool article on mexico 3"}
+    // ];
+
+    // return {
+    //     type: "FETCH_PROJECTS",
+    //     payload: fixtures
+    // }
+    const type = "FETCH_PROJECTS";
+
+    return (dispatch) => {
+
+        axios.get(APIURL + 'projects')
+            .then((res) => {
+                dispatch({
+                    type: type,
+                    payload: res
+                });
+            }).catch(() => {
+            // eslint-disable-next-line no-console
+            console.log("Error");
+            dispatch({
+                type: type,
+                payload: "error"
+            });
+        });
     }
 }
 export function addProject(newProject) {

@@ -40,13 +40,16 @@ mongoose.connect('mongodb://localhost/jinv', (err) => {
 
 
 app.get('/api/projects', (req, res) => {
-    const fixtures = [
-        {title: "Some Article", desc: "Super cool article on mexico"},
-        {title: "Some Article 2", desc: "Another cool article on mexico 2"},
-        {title: "Some Article 3", desc: "Super cool article on mexico 3"}
-    ];
+    // const fixtures = [
+    //     {title: "Some Article", desc: "Super cool article on mexico"},
+    //     {title: "Some Article 2", desc: "Another cool article on mexico 2"},
+    //     {title: "Some Article 3", desc: "Super cool article on mexico 3"}
+    // ];
 
-    res.json(fixtures);
+    Project.find({}, (err, projects) => {
+        res.json(projects)
+        //res.json(fixtures)
+    });
 });
 
 
@@ -64,7 +67,6 @@ app.post('/api/project', (req, res) => {
 //<-- api
 app.get('/',  (req, res) => {
     console.log(`request=${req}`);
-
     const index = path.join(__dirname, 'dist/index.html');
     res.write(middleware.fileSystem.readFileSync(index));
     res.end();
