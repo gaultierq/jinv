@@ -4,12 +4,12 @@
   "description": "Just trying again this ginv project",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "nodemon ./server --exec babel-node --presets es2015,stage-3",
-    "dev2": "babel-node ./server --presets es2015,stage-3"
+    "dev": "nodemon -r babel-register ./server  --presets es2015,stage-3"
   },
   "author": "QG",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^6.1.2",
@@ -32,6 +32,7 @@
     "react-router": "2.0.0",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "webpack": "^2.6.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server": "^2.4.5",

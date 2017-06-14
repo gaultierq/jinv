@@ -45,7 +45,9 @@ app.get('/api/projects', (req, res) => {
 
 
 app.post('/api/project', (req, res) => {
-    let proj = new Project(req.body);
+    const body = req.body;
+    console.log(`saving proj ${body}`);
+    let proj = new Project(body);
 
     proj.save().then((p) => {
         console.log(`project saved ${p}`);
@@ -54,7 +56,7 @@ app.post('/api/project', (req, res) => {
 });
 
 //<-- api
-app.get('/', function (req, res) {
+app.get('/',  (req, res) => {
     console.log(`request=${req}`);
 
     const index = path.join(__dirname, 'dist/index.html');
