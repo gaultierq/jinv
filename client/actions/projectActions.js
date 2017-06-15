@@ -13,14 +13,14 @@ export function fetchProjects() {
                     type: type,
                     payload: res.data
                 });
-            }).catch(() => {
+            })/*.catch(() => {
             // eslint-disable-next-line no-console
             console.log("Error");
             dispatch({
                 type: type,
                 payload: "error"
             });
-        });
+        })*/;
     }
 }
 export function addProject(newProject) {

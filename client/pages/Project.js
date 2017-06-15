@@ -5,7 +5,10 @@
 import React from 'react';
 import { deleteProject} from "../actions/projectActions"
 import { connect } from "react-redux"
-import { Button } from 'react-toolbox/lib/button/Button';
+import { Button } from 'react-toolbox/lib/button';
+//import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+
 
 @connect()
 export default class Project extends React.Component {
@@ -13,14 +16,23 @@ export default class Project extends React.Component {
     render() {
 
         const { title, desc} = this.props;
-        //console.log(`rendering project with title=${ title } and desc=${ desc } `); // eslint-disable-line
 
         return (
-            <project class="col-md-4">
-                <h4>{title}</h4>
-                <p>{desc}</p>
-                <Button label="delete" onClick={this.delete.bind(this)}/>
-            </project>
+            <Card style={{width: '250px'}} >
+                <CardHeader
+                    title="Quentin"
+                    avatar="https://placeimg.com/800/450/nature"
+                />
+                <CardMedia
+                    overlay={<CardTitle title={title} subtitle={desc} />}
+                >
+                    <img src="https://placeimg.com/800/450/nature" alt="" />
+                </CardMedia>
+                <CardText>{desc}</CardText>
+                <CardActions >
+                    <Button label="delete" onClick={this.delete.bind(this)} raised primary />
+                </CardActions>
+            </Card>
         );
     }
 

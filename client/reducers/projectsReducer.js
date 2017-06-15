@@ -5,7 +5,7 @@ export default function reducer( state={
     fetched: false,
     error: null
 }, action) {
-    debugger;
+    //debugger;
     switch (action.type) {
         case "FETCH_PROJECTS": {
             return { ...state, projects: action.payload, fetching: false, fetched: true};

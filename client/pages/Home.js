@@ -7,6 +7,7 @@ import Project from "./Project";
 import { connect } from "react-redux"
 
 import { fetchProjects, addProject } from "../actions/projectActions"
+import {GridList, GridTile, Subheader} from "material-ui";
 
 @connect((store) => {
     return {
@@ -33,6 +34,19 @@ export default class Home extends React.Component {
     }
 
     render() {
+        const styles = {
+            root: {
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'space-around',
+            },
+            gridList: {
+                width: 600,
+                height: 450,
+                overflowY: 'auto',
+            },
+        };
+
         const { projects } = this.props;
         let Projects = null;
         if (projects) {
@@ -42,7 +56,21 @@ export default class Home extends React.Component {
         return (
             <home>
                 <h2>Projects</h2>
-                <div class="row">{Projects}</div>
+
+                {/*<div class="row">{Projects}</div>*/}
+
+                <GridList
+                    cellHeight={180}
+                    style={styles.gridList}
+                >
+                    {projects.map((project) => (
+                        <GridTile key={project._id}>
+                            <Project key={project._id} id={project._id} title={project.title} desc={project.desc}/>
+                        </GridTile>
+                    ))}
+                </GridList>
+
+
                 <div class="row">
                     <input placeholder="title" type="text" onChange={ this.handleTitleChange.bind(this) }/>
                     <input placeholder="description" type="text" onChange={ this.handleDescChange.bind(this) }/>
