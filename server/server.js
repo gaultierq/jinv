@@ -56,11 +56,12 @@ app.get('/api/projects', (req, res) => {
 app.post('/api/project', (req, res) => {
     const body = req.body;
     console.log(`saving proj ${body}`);
+
     let proj = new Project(body);
 
     proj.save().then((p) => {
         console.log(`project saved ${p}`);
-        res.json(p);
+        return res.json(p.toObject());
     })
 });
 

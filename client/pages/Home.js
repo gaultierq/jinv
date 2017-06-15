@@ -6,11 +6,11 @@ import React from 'react';
 import Project from "./Project";
 import { connect } from "react-redux"
 
-import { fetchProjects, addProject } from "../actions/project"
+import { fetchProjects, addProject } from "../actions/projectActions"
 
 @connect((store) => {
     return {
-        projects: store.project.projects.data,
+        projects: store.project.projects,
     };
 })
 export default class Home extends React.Component {

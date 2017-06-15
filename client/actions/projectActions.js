@@ -21,7 +21,7 @@ export function fetchProjects() {
             .then((res) => {
                 dispatch({
                     type: type,
-                    payload: res
+                    payload: res.data
                 });
             }).catch(() => {
             // eslint-disable-next-line no-console
@@ -47,7 +47,7 @@ export function addProject(newProject) {
         .then((res) => {
             dispatch({
                 type: type,
-                payload: res
+                payload: res.data
             });
         }).catch(() => {
 
