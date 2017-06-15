@@ -14,7 +14,7 @@ export default function reducer( state={
             return { ...state, projects: [...state.projects, action.payload]};
         }
         case "DELETE_PROJECT": {
-            return { ...state, projects: state.projects.filter(p => p.id !== action.payload._id)};
+            return { ...state, projects: state.projects.filter(p => p._id !== action.payload._id)};
         }
     }
     return state
