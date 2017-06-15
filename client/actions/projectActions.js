@@ -3,16 +3,6 @@ import axios from 'axios';
 const APIURL = 'http://localhost:3000/api/';
 
 export function fetchProjects() {
-    // const fixtures = [
-    //     {title: "Some Article", desc: "Super cool article on mexico"},
-    //     {title: "Some Article 2", desc: "Super cool article on mexico 2"},
-    //     {title: "Some Article 3", desc: "Super cool article on mexico 3"}
-    // ];
-
-    // return {
-    //     type: "FETCH_PROJECTS",
-    //     payload: fixtures
-    // }
     const type = "FETCH_PROJECTS";
 
     return (dispatch) => {
@@ -34,29 +24,45 @@ export function fetchProjects() {
     }
 }
 export function addProject(newProject) {
-    // return {
-    //     type: "ADD_PROJECT",
-    //     payload: newProject
-    // }
-
-    const type = "ADD_PROJECT";
     let {title, desc} = newProject;
-
+    let type = "ADD_PROJECT";
     return (dispatch) => {
-        return axios.post('http://localhost:3000/api/project', {title, desc})
-        .then((res) => {
-            dispatch({
-                type: type,
-                payload: res.data
-            });
-        }).catch(() => {
+        axios.post('http://localhost:3000/api/project', {title, desc})
+            .then((res) => {
+                dispatch({
+                    type: type,
+                    payload: res.data
+                });
+            }).catch(() => {
 
-            // eslint-disable-next-line no-console
-            console.log("Error");
-            dispatch({
-                type: type,
-                payload: "error"
+                // eslint-disable-next-line no-console
+                console.log("Error");
+                dispatch({
+                    type: type,
+                    payload: "error"
+                });
             });
-        });
     };
+}
+
+export function deleteProject(_id) {
+    return (dispatch) => {
+        let type = "DELETE_PROJECT";
+        axios.delete('http://localhost:3000/api/project', {params: {_id}})
+            .then((res) => {
+                dispatch({
+                    type: type,
+                    payload: res.data
+                });
+            })
+            .catch(() => {
+                // eslint-disable-next-line no-console
+                console.log("Error");
+                dispatch({
+                    type: type,
+                    payload: "error"
+                });
+            });
+    };
+
 }

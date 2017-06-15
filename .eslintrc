@@ -19,7 +19,8 @@
     "no-unused-vars": 1,
     "react/no-unknown-property": [2, {"ignore": ["class", "for"]}],
     "react/prop-types": 0, //todo: warn
-    "no-debugger": 0
+    "no-debugger": 0, //todo: warn
+    "no-console": 0 //todo: warn
   }
 
 

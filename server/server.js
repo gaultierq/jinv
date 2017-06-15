@@ -33,19 +33,16 @@ app.use(require("webpack-hot-middleware")(compiler, {
 
 //--> api
 // connect database
-mongoose.connect('mongodb://localhost/jinv', (err) => {
+mongoose.connect('mongodb://localhost/jinv', (err, d) => {
     if(err) console.log(err);
-    else console.log('Connected to database');
+    else {
+        console.log(`Connected to database`);
+    }
+
 });
 
 
 app.get('/api/projects', (req, res) => {
-    // const fixtures = [
-    //     {title: "Some Article", desc: "Super cool article on mexico"},
-    //     {title: "Some Article 2", desc: "Another cool article on mexico 2"},
-    //     {title: "Some Article 3", desc: "Super cool article on mexico 3"}
-    // ];
-
     Project.find({}, (err, projects) => {
         res.json(projects)
         //res.json(fixtures)
@@ -63,6 +60,23 @@ app.post('/api/project', (req, res) => {
         console.log(`project saved ${p}`);
         return res.json(p.toObject());
     })
+});
+
+app.delete('/api/project', (req, res) => {
+    const body = req.query;
+    console.log(`deleting proj ${JSON.stringify(body)}`);
+
+    Project
+        .findByIdAndRemove(body)
+        .exec()
+        .then((p) => {
+            console.log(`project removed ${p}`);
+            return res.json(p ? p.toObject() : {} );
+        }
+    ).then(null, (err) => {
+        console.log(`error while removing the project ${err}`);
+        return res.sendStatus(500).end();
+    });
 });
 
 //<-- api

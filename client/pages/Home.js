@@ -36,7 +36,7 @@ export default class Home extends React.Component {
         const { projects } = this.props;
         let Projects = null;
         if (projects) {
-            Projects = projects.map((project, i) => <Project key={i} title={project.title} desc={project.desc}/> );
+            Projects = projects.map((project) => <Project key={project._id} id={project._id} title={project.title} desc={project.desc}/> );
         }
 
         return (
@@ -46,7 +46,7 @@ export default class Home extends React.Component {
                 <div class="row">
                     <input placeholder="title" type="text" onChange={ this.handleTitleChange.bind(this) }/>
                     <input placeholder="description" type="text" onChange={ this.handleDescChange.bind(this) }/>
-                    <button onClick={this.addProject.bind(this)}>Add a new project</button>
+                    <button class="btn btn-default" onClick={this.addProject.bind(this)}>Add a new project</button>
                 </div>
 
             </home>
