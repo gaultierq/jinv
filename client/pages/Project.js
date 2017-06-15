@@ -5,6 +5,7 @@
 import React from 'react';
 import { deleteProject} from "../actions/projectActions"
 import { connect } from "react-redux"
+import { Button } from 'react-toolbox/lib/button/Button';
 
 @connect()
 export default class Project extends React.Component {
@@ -18,7 +19,7 @@ export default class Project extends React.Component {
             <project class="col-md-4">
                 <h4>{title}</h4>
                 <p>{desc}</p>
-                <button class="btn btn-danger" onClick={this.delete.bind(this)}>delete</button>
+                <Button label="delete" onClick={this.delete.bind(this)}/>
             </project>
         );
     }
