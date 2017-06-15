@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom'
 import Footer from "./components/Footer";
 import { Provider } from "react-redux"
 import store from "./store"
+import {AppBar, MuiThemeProvider} from "material-ui";
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 const app = document.getElementById('app');
 
@@ -14,16 +16,24 @@ if (module.hot) {
     module.hot.accept();
 }
 
+//https://github.com/callemall/material-ui/issues/4670
+injectTapEventPlugin();
+
 const layout = (<Provider store={store}>
-        <BrowserRouter>
+    <BrowserRouter>
+        <MuiThemeProvider>
             <div>
-                <Nav/>
+                <AppBar
+                    title="Jinv"
+                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                />
                 <Main/>
                 <Footer/>
             </div>
+        </MuiThemeProvider>
 
-        </BrowserRouter>
-    </Provider>);
+    </BrowserRouter>
+</Provider>);
 
 
 ReactDOM.render(layout, app);

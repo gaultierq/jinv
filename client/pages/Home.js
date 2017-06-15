@@ -41,32 +41,26 @@ export default class Home extends React.Component {
                 justifyContent: 'space-around',
             },
             gridList: {
-                width: 600,
-                height: 450,
+                width: '100%',
                 overflowY: 'auto',
             },
         };
 
         const { projects } = this.props;
-        let Projects = null;
-        if (projects) {
-            Projects = projects.map((project) => <Project key={project._id} id={project._id} title={project.title} desc={project.desc}/> );
-        }
 
         return (
-            <home>
+            <home style={styles.home}>
                 <h2>Projects</h2>
-
-                {/*<div class="row">{Projects}</div>*/}
-
                 <GridList
                     cellHeight={180}
                     style={styles.gridList}
                 >
                     {projects.map((project) => (
-                        <GridTile key={project._id}>
-                            <Project key={project._id} id={project._id} title={project.title} desc={project.desc}/>
-                        </GridTile>
+                        <div key={project._id}>
+                            <GridTile>
+                                <Project key={project._id} id={project._id} title={project.title} desc={project.desc}/>
+                            </GridTile>
+                        </div>
                     ))}
                 </GridList>
 
