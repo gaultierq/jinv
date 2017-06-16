@@ -66,16 +66,16 @@ export default class Home extends React.Component {
          */
 
 
-        const simpleStorage = contract(SimpleStorageContract)
-        simpleStorage.setProvider(this.state.web3.currentProvider)
+        const simpleStorage = contract(SimpleStorageContract);
+        simpleStorage.setProvider(this.state.web3.currentProvider);
 
         // Declaring this for later so we can chain functions on SimpleStorage.
-        var simpleStorageInstance
+        let simpleStorageInstance;
 
         // Get accounts.
         this.state.web3.eth.getAccounts((error, accounts) => {
             simpleStorage.deployed().then((instance) => {
-                simpleStorageInstance = instance
+                simpleStorageInstance = instance;
 
                 // Stores a given value, 5 by default.
                 return simpleStorageInstance.set(50, {from: accounts[0]})
@@ -174,14 +174,7 @@ export default class Home extends React.Component {
                     </GridList>
 
                     <div className="pure-g">
-                        <div className="pure-u-1-1">
-                            <h1>Good to Go!</h1>
-                            <p>Your Truffle Box is installed and ready.</p>
-                            <h2>Smart Contract Example</h2>
-                            <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-                            <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-                            <p>The stored value is: {this.state.storageValue}</p>
-                        </div>
+                        <p>The stored value is: {this.state.storageValue}</p>
                     </div>
 
                 </div>
