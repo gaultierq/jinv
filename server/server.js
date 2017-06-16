@@ -70,7 +70,8 @@ app.delete('/api/project', (req, res) => {
 
 //<-- api
 app.get('/',  (req, res) => {
-    const index = path.join(process.cwd(), 'client/index.html');
+    console.log(`request:home`);
+    const index = path.join(process.cwd(), 'dist/index.html');
     res.write(fs.readFileSync(index));
     res.end();
 });
