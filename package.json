@@ -40,6 +40,7 @@
     "oo7-parity": "^0.6.1",
     "oo7-react": "^0.4.1",
     "parity-reactive-ui": "^0.4.3",
+    "promise": "^7.3.0",
     "react": "^15.6.1",
     "react-css-themr": "^2.1.2",
     "react-dom": "^15.6.1",
@@ -56,6 +57,8 @@
     "start-server-webpack-plugin": "^2.1.2",
     "style-loader": "^0.18.2",
     "toolbox-loader": "0.0.3",
+    "truffle-contract": "^1.1.8",
+    "truffle-solidity-loader": "0.0.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1",
     "webpack-node-externals": "^1.5.4"

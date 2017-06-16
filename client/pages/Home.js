@@ -7,12 +7,15 @@ import Project from "./Project";
 import { connect } from "react-redux"
 
 import { fetchProjects, addProject } from "../actions/projectActions"
-import {FlatButton, GridList, GridTile, Subheader} from "material-ui";
+import {FlatButton, GridList, GridTile} from "material-ui";
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Dialog from 'material-ui/Dialog';
+
+import SimpleStorageContract from '../../build/contracts/SimpleStorage.json'
+import getWeb3 from '../utils/getWeb3'
+import contract from "truffle-contract";
 
 @connect((store) => {
     return {
@@ -32,6 +35,60 @@ export default class Home extends React.Component {
         };
     }
 
+    componentWillMount() {
+
+        this.props.dispatch(fetchProjects())
+
+
+        // Get network provider and web3 instance.
+        // See utils/getWeb3 for more info.
+
+        getWeb3
+            .then(results => {
+                this.setState({
+                    web3: results.web3
+                });
+
+                // Instantiate contract once web3 provided.
+                this.instantiateContract()
+            })
+            .catch(() => {
+                console.log('Error finding web3.')
+            })
+    }
+
+    instantiateContract() {
+        /*
+         * SMART CONTRACT EXAMPLE
+         *
+         * Normally these functions would be called in the context of a
+         * state management library, but for convenience I've placed them here.
+         */
+
+
+        const simpleStorage = contract(SimpleStorageContract)
+        simpleStorage.setProvider(this.state.web3.currentProvider)
+
+        // Declaring this for later so we can chain functions on SimpleStorage.
+        var simpleStorageInstance
+
+        // Get accounts.
+        this.state.web3.eth.getAccounts((error, accounts) => {
+            simpleStorage.deployed().then((instance) => {
+                simpleStorageInstance = instance
+
+                // Stores a given value, 5 by default.
+                return simpleStorageInstance.set(50, {from: accounts[0]})
+            }).then((result) => {
+                // Get the value from the contract to prove it worked.
+                return simpleStorageInstance.get.call(accounts[0])
+            }).then((result) => {
+                // Update state with the result.
+                return this.setState({ storageValue: result.c[0] })
+            })
+        })
+    }
+
 
     handleTitleChange(e) {
         this.setState({ newTitle: e.target.value });
@@ -41,9 +98,6 @@ export default class Home extends React.Component {
         this.setState({ newDesc: e.target.value });
     }
 
-    componentWillMount() {
-        this.props.dispatch(fetchProjects())
-    }
 
     addProject() {
         //todo: inprove semantic
@@ -119,11 +173,16 @@ export default class Home extends React.Component {
                         ))}
                     </GridList>
 
-                    {/*<div>*/}
-                    {/*<TextField hintText="Project title"onChange={ this.handleTitleChange.bind(this) } /> <br/>*/}
-                    {/*<TextField hintText="Project description"onChange={ this.handleDescChange.bind(this) } /> <br/>*/}
-                    {/*<RaisedButton label="Add" style={styles.button} onClick={this.addProject.bind(this)} />*/}
-                    {/*</div>*/}
+                    <div className="pure-g">
+                        <div className="pure-u-1-1">
+                            <h1>Good to Go!</h1>
+                            <p>Your Truffle Box is installed and ready.</p>
+                            <h2>Smart Contract Example</h2>
+                            <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
+                            <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
+                            <p>The stored value is: {this.state.storageValue}</p>
+                        </div>
+                    </div>
 
                 </div>
                 <FloatingActionButton style={styles.floating} onClick={this.handleOpen.bind(this)}>
