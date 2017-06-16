@@ -16,6 +16,7 @@ import Dialog from 'material-ui/Dialog';
 import SimpleStorageContract from '../../build/contracts/SimpleStorage.json'
 import getWeb3 from '../utils/getWeb3'
 import contract from "truffle-contract";
+import axios from 'axios'
 
 @connect((store) => {
     return {
@@ -55,6 +56,14 @@ export default class Home extends React.Component {
             .catch(() => {
                 console.log('Error finding web3.')
             })
+    }
+
+    createContract() {
+        const APIURL = 'http://localhost:3000/api/';
+
+        axios.post(APIURL + 'submitContract').then((res) => {
+            console.log('contract creation submited' + res);
+        });
     }
 
     instantiateContract() {
@@ -176,6 +185,8 @@ export default class Home extends React.Component {
                     <div className="pure-g">
                         <p>The stored value is: {this.state.storageValue}</p>
                     </div>
+
+                    <FlatButton label={"create contract"} onClick={this.createContract.bind(this)}/>
 
                 </div>
                 <FloatingActionButton style={styles.floating} onClick={this.handleOpen.bind(this)}>

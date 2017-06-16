@@ -54,6 +54,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
+    "solc": "^0.4.11",
     "start-server-webpack-plugin": "^2.1.2",
     "style-loader": "^0.18.2",
     "toolbox-loader": "0.0.3",
