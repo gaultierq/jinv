@@ -70,7 +70,6 @@ app.delete('/api/project', (req, res) => {
 
 //<-- api
 app.get('/',  (req, res) => {
-    console.log(`request1=${req}`);
     const index = path.join(process.cwd(), 'client/index.html');
     res.write(fs.readFileSync(index));
     res.end();

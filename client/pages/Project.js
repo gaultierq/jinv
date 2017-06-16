@@ -8,21 +8,16 @@ import { connect } from "react-redux"
 import { Button } from 'react-toolbox/lib/button';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
-
 @connect()
 export default class Project extends React.Component {
 
     render() {
-
         const { title, desc} = this.props;
 
         return (
             <div>
-                <Card style={{width: '200px'}} >
-                    <CardHeader
-                        title={title}
-                        avatar="//placeimg.com/800/450/nature"
-                    />
+                <Card>
+                    <CardHeader title={title} avatar="//placeimg.com/800/450/nature" />
                     <CardText>{desc}</CardText>
                     <Button label="delete" onClick={this.delete.bind(this)} raised primary />
                 </Card>

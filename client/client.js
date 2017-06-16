@@ -16,6 +16,7 @@ if (module.hot) {
     module.hot.accept();
 }
 console.log("-- INIT CLIENT --");
+
 //https://github.com/callemall/material-ui/issues/4670
 injectTapEventPlugin();
 
