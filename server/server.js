@@ -1,45 +1,31 @@
-/* eslint-disable no-console */
-
 import Project from './db/ProjectSchema';
 import mongoose from "mongoose";
+import express from "express";
+import fs from 'fs';
+import path from 'path';
+import bodyParser from "body-parser";
 
-const path = require('path');
-const config = require("../webpack.config");
+console.log('-- CREATING APP --');
 
-
-const express = require('express');
 const app = express();
 
-var bodyParser = require('body-parser')
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-const compiler = require("webpack")(config);
-
-// --> getting rid of webpack-dev-server
-const middleware = require("webpack-dev-middleware")(compiler, {
-    noInfo: false,
-    publicPath: "/",
-    stats: {colors: true}
-});
-app.use(middleware);
-
-app.use(require("webpack-hot-middleware")(compiler, {
-    log: console.log
-}));
-// <-- getting rid of webpack-dev-server
-
+//for hot module. probably there is a better way!
+mongoose.disconnect(() => {
+        mongoose.connect('mongodb://localhost/jinv', (err) => {
+            if(err) console.log(err);
+            else {
+                console.log(`Connected to database`);
+            }
+        });
+    }
+);
 //--> api
 // connect database
-mongoose.connect('mongodb://localhost/jinv', (err, d) => {
-    if(err) console.log(err);
-    else {
-        console.log(`Connected to database`);
-    }
-
-});
 
 
 app.get('/api/projects', (req, res) => {
@@ -49,6 +35,9 @@ app.get('/api/projects', (req, res) => {
     });
 });
 
+app.get('/api/test', (req, res) => {
+    res.send("oki");
+});
 
 app.post('/api/project', (req, res) => {
     const body = req.body;
@@ -70,10 +59,10 @@ app.delete('/api/project', (req, res) => {
         .findByIdAndRemove(body)
         .exec()
         .then((p) => {
-            console.log(`project removed ${p}`);
-            return res.json(p ? p.toObject() : {} );
-        }
-    ).then(null, (err) => {
+                console.log(`project removed ${p}`);
+                return res.json(p ? p.toObject() : {} );
+            }
+        ).then(null, (err) => {
         console.log(`error while removing the project ${err}`);
         return res.sendStatus(500).end();
     });
@@ -81,15 +70,11 @@ app.delete('/api/project', (req, res) => {
 
 //<-- api
 app.get('/',  (req, res) => {
-    console.log(`request=${req}`);
-    const index = path.join(__dirname, 'dist/index.html');
-    res.write(middleware.fileSystem.readFileSync(index));
+    console.log(`request1=${req}`);
+    const index = path.join(process.cwd(), 'client/index.html');
+    res.write(fs.readFileSync(index));
     res.end();
 });
 
-const port = 3000;
-app.listen(port, function () {
-    // eslint-disable-next-line no-console
 
-    console.log('==> 🌎  App running : http://localhost:' + port);
-});
+export default app;

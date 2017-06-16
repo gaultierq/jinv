@@ -50,7 +50,7 @@ export default class Home extends React.Component {
 
         return (
             <home style={styles.home}>
-                <h2>Projects</h2>
+                <h2>Projects!</h2>
                 <GridList
                     cellHeight={180}
                     style={styles.gridList}
