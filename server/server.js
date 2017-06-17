@@ -3,9 +3,8 @@ import express from "express";
 import fs from 'fs';
 import path from 'path';
 import bodyParser from "body-parser";
-import solc from "solc";
 import Project from './db/ProjectSchema';
-import Contract from './db/ContractSchema';
+import {saveContract} from './contract/utils'
 
 console.log('-- CREATING APP --');
 
@@ -70,39 +69,9 @@ app.delete('/api/project', (req, res) => {
     });
 });
 
-
-
 app.post('/api/submitContract', (req, res) => {
 
-    const contractName = "SimpleStorage";
-    let contractSource = fs
-        .readFileSync(path.join(process.cwd(), "contracts/" + contractName+'.sol'))
-        .toString().replace(/\n/g,' ');
-    console.log(`contract source=${contractSource} `);
-
-    let compiled = solc.compile(contractSource, 0);
-    console.log(`contract compiled=${JSON.stringify(compiled)} `);
-
-    const c = ":" + contractName;
-    if(!compiled.contracts[c]) {
-        console.log('Contract must have same name as file!');
-        throw new Error("Contract must have same name as file!");
-    }
-
-    let bytecode = compiled.contracts[c].bytecode;
-    let interfac = compiled.contracts[c].interface;
-
-    let contract_data = {
-        abi: JSON.parse(interfac),
-        binary: bytecode
-    };
-
-    let contract = new Contract(contract_data);
-
-    contract.save().then((p) => {
-        console.log(`contract saved: ${p}`);
-        return res.json(p.toObject()._id);
-    })
+    saveContract(res);
 });
 
 //<-- api

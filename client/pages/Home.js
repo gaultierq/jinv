@@ -62,7 +62,7 @@ export default class Home extends React.Component {
         const APIURL = 'http://localhost:3000/api/';
 
         axios.post(APIURL + 'submitContract').then((res) => {
-            console.log('contract creation submited' + res);
+            console.log('contract creation submited:' + res.data);
         });
     }
 
