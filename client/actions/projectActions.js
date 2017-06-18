@@ -66,3 +66,24 @@ export function deleteProject(_id) {
     };
 
 }
+
+export function createToken(_id) {
+    return (dispatch) => {
+        let type = "CREATE_TOKEN";
+
+        axios.post(APIURL + 'createToken', {_id})
+            .then((res) => {
+                dispatch({
+                    type: type,
+                    payload: res.data
+                });
+            }).catch(() => {
+            console.log("Error");
+            dispatch({
+                type: type,
+                payload: "error"
+            });
+        });
+
+    };
+}

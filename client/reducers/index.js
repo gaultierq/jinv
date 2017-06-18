@@ -3,8 +3,8 @@
  */
 import { combineReducers } from "redux"
 
-import project from "./projectsReducer"
+import projects from "./projectsReducer"
 
 export default combineReducers({
-    project
+    projects: projects
 })

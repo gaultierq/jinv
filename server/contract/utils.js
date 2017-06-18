@@ -3,6 +3,7 @@
  */
 import solc from "solc";
 import Contract from '../db/ContractSchema';
+import Token from '../db/TokenSchema';
 import fs from 'fs';
 import path from 'path';
 
@@ -32,13 +33,19 @@ let createContractFromTemplate = function () {
     };
 };
 
-export function saveContract(res) {
+export function createToken(project, res) {
+
     let contract_data = createContractFromTemplate();
 
     let contract = new Contract(contract_data);
 
-    contract.save().then((p) => {
-        console.log(`contract saved: ${p}`);
-        return res.json(p.toObject()._id);
+    let token = new Token({
+        contract: contract
+    });
+
+    project.token = token;
+    project.save().then((c) => {
+        console.log(`contract saved: ${c}`);
+        return c;
     })
 }

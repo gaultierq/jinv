@@ -16,18 +16,13 @@ import Dialog from 'material-ui/Dialog';
 import SimpleStorageContract from '../../build/contracts/SimpleStorage.json'
 import getWeb3 from '../utils/getWeb3'
 import contract from "truffle-contract";
-import axios from 'axios'
 
 @connect((store) => {
     return {
-        projects: store.project.projects,
+        projects: store.projects,
     };
 })
 export default class Home extends React.Component {
-
-    // state = {
-    //     open: false
-    // };
 
     constructor() {
         super();
@@ -58,14 +53,6 @@ export default class Home extends React.Component {
             })
     }
 
-    createContract() {
-        const APIURL = 'http://localhost:3000/api/';
-
-        axios.post(APIURL + 'submitContract').then((res) => {
-            console.log('contract creation submited:' + res.data);
-        });
-    }
-
     instantiateContract() {
         /*
          * SMART CONTRACT EXAMPLE
@@ -73,8 +60,6 @@ export default class Home extends React.Component {
          * Normally these functions would be called in the context of a
          * state management library, but for convenience I've placed them here.
          */
-
-
         const simpleStorage = contract(SimpleStorageContract);
         simpleStorage.setProvider(this.state.web3.currentProvider);
 
@@ -145,9 +130,9 @@ export default class Home extends React.Component {
                 float: 'right'
             }
         };
-
         const { projects } = this.props;
 
+        debugger;
         const actions = [
             // eslint-disable-next-line react/jsx-key
             <FlatButton
@@ -163,7 +148,6 @@ export default class Home extends React.Component {
                 onTouchTap={this.handleAdd.bind(this)}
             />,
         ];
-
         return (
             <div>
                 <div style={styles.home}>
@@ -173,20 +157,25 @@ export default class Home extends React.Component {
                         cols={4}
                         style={styles.gridList}
                     >
-                        {projects.map((project) => (
-                            <div key={project._id}>
-                                <GridTile>
-                                    <Project key={project._id} id={project._id} title={project.title} desc={project.desc}/>
-                                </GridTile>
-                            </div>
-                        ))}
+                        {projects.map((project) => {
+                            console.log(`rendering project_id=${project._id} and project title=${project.title}`);
+
+                            return (
+                                <div key={project._id}>
+                                    <GridTile>
+                                        <Project key={project._id} project={project} />
+                                    </GridTile>
+                                </div>
+                            )}
+
+                        )}
                     </GridList>
 
                     <div className="pure-g">
                         <p>The stored value is: {this.state.storageValue}</p>
                     </div>
 
-                    <FlatButton label={"create contract"} onClick={this.createContract.bind(this)}/>
+                    {/*<FlatButton label={"create contract"} onClick={this.createContract.bind(this)}/>*/}
 
                 </div>
                 <FloatingActionButton style={styles.floating} onClick={this.handleOpen.bind(this)}>

@@ -1,8 +1,10 @@
 import mong from "mongoose";
+import tok from "./TokenSchema"
 
 const projSch = mong.Schema({
     title: String,
-    desc: String
+    desc: String,
+    token: tok
 });
 
 const ProjectModel = mong.model('Project', projSch);

@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import bodyParser from "body-parser";
 import Project from './db/ProjectSchema';
-import {saveContract} from './contract/utils'
+import {createToken} from './contract/utils'
 
 console.log('-- CREATING APP --');
 
@@ -70,8 +70,14 @@ app.delete('/api/project', (req, res) => {
 });
 
 app.post('/api/submitContract', (req, res) => {
+    const body = req.query;
+    Project.findById(body).exec().then((p) => {
+        if (p.token !== null) {
+            throw new Error("This project already has a token");
+        }
+        createToken(p, res);
+    });
 
-    saveContract(res);
 });
 
 //<-- api
