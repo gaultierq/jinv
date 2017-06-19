@@ -132,7 +132,7 @@ export default class Home extends React.Component {
         };
         const { projects } = this.props;
 
-        debugger;
+        //debugger;
         const actions = [
             // eslint-disable-next-line react/jsx-key
             <FlatButton
@@ -158,12 +158,14 @@ export default class Home extends React.Component {
                         style={styles.gridList}
                     >
                         {projects.map((project) => {
-                            console.log(`rendering project_id=${project._id} and project title=${project.title}`);
+
+                            const { _id } = project;
+                            console.log(`rendering project_id=${_id}`);
 
                             return (
-                                <div key={project._id}>
+                                <div key={_id}>
                                     <GridTile>
-                                        <Project key={project._id} project={project} />
+                                        <Project key={_id} project={project} />
                                     </GridTile>
                                 </div>
                             )}

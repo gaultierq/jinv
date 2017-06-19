@@ -34,18 +34,26 @@ let createContractFromTemplate = function () {
 };
 
 export function createToken(project, res) {
-
     let contract_data = createContractFromTemplate();
-
+    if (!contract_data) {
+        res.sendStatus(500);
+        return;
+    }
     let contract = new Contract(contract_data);
 
-    let token = new Token({
+    project.token = new Token({
         contract: contract
     });
 
-    project.token = token;
-    project.save().then((c) => {
-        console.log(`contract saved: ${c}`);
-        return c;
-    })
+    console.log(`saving: ${JSON.stringify(project)}`);
+
+    project
+        .save()
+        .then((c) => {
+            console.log(`project saved: ${c}`);
+            res.send(JSON.stringify(c));
+            return c;
+        })
+        .then(null, (err) => res.status(500).send(err));
 }
+

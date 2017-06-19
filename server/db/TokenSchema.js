@@ -1,11 +1,10 @@
 import mong from "mongoose";
-import {Schema} from "mongoose"
-import Contract from "./ContractSchema"
+import {ContractSchema} from "./ContractSchema"
 
-const tokenSch = mong.Schema({
-    contract: Contract
+export const TokenSchema = mong.Schema({
+    contract: ContractSchema
 });
 
-const TokenModel = mong.model('Token', tokenSch);
+const TokenModel = mong.model('Token', TokenSchema);
 
 export default TokenModel;

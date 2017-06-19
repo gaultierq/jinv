@@ -22,6 +22,7 @@ mongoose.disconnect(() => {
             else {
                 console.log(`Connected to database`);
             }
+            mongoose.set('debug', true);
         });
     }
 );
@@ -69,15 +70,46 @@ app.delete('/api/project', (req, res) => {
     });
 });
 
-app.post('/api/submitContract', (req, res) => {
-    const body = req.query;
-    Project.findById(body).exec().then((p) => {
-        if (p.token !== null) {
-            throw new Error("This project already has a token");
-        }
-        createToken(p, res);
-    });
+app.post('/api/createToken', (req, res) => {
+    const body = req.body;
+    console.log(`creating token ${JSON.stringify(body)}`);
 
+    const id = body._id;
+    Project
+        .findById(id)
+        .exec()
+        .then((p) => {
+            console.log(`project found: ${p}`);
+            if (p.token) {
+                res.status(500).send(`This project already has a token: ${p.token}`);
+                return;
+            }
+            createToken(p, res);
+        })
+        .then(null, err => {
+            res.status(500).send(`Cannot create token for project ${id}:\n${err}`);
+        });
+});
+
+app.post('/api/deployToken', (req, res) => {
+    const body = req.body;
+    console.log(`deploying token ${JSON.stringify(body)}`);
+
+    const id = body._id;
+    Project
+        .findById(id)
+        .exec()
+        .then((p) => {
+            console.log(`project found: ${p}`);
+            if (p.token) {
+                res.status(500).send(`This project already has a token: ${p.token}`);
+                return;
+            }
+            createToken(p, res);
+        })
+        .then(null, err => {
+            res.status(500).send(`Cannot create token for project ${id}:\n${err}`);
+        });
 });
 
 //<-- api

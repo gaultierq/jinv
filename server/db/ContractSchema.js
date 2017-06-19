@@ -1,11 +1,13 @@
 import mong from "mongoose";
 import {Schema} from "mongoose"
 
-const contractSch = mong.Schema({
+export const ContractSchema = mong.Schema({
     abi: Schema.Types.Mixed,
-    binary: String
+    binary: String,
+    address: String,
+    creationTxHash: String
 });
 
-const ContractModel = mong.model('Contract', contractSch);
+const ContractModel = mong.model('Contract', ContractSchema);
 
 export default ContractModel;
