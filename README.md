@@ -1,1 +1,1 @@
-Just playing around with react
+Just playing around with solidity and react
